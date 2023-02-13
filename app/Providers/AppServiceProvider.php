@@ -38,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
+
+        
         // every single view
 //        View::share( 'channels',Chanal::orderBy('created_at')->get());
 
@@ -47,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
 //          $view->with("channels",  Chanal::orderBy('created_at')->get());
 //        });
 //
+
 
         // option 3  Dedicated class
 
