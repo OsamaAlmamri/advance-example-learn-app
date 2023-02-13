@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Chanal;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +15,15 @@ class ChanalFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+
+
+    protected $model = Chanal::class;
+
     public function definition()
     {
         return [
-            //
+            'name' => fake()->name(),
         ];
     }
 }
