@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        //Service Container
 
         $this->app->singleton(IPaymentGatewayContract::class, function ($app) {
             if (request()->has('credit'))
