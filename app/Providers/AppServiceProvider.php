@@ -38,6 +38,12 @@ class AppServiceProvider extends ServiceProvider
     {
 
         // every single view
-        View::share( 'channels',Chanal::orderBy('created_at')->get());
+//        View::share( 'channels',Chanal::orderBy('created_at')->get());
+
+
+        // option 2 Granular view with wildcards
+        View::composer(['channels','posts.*'],function ($view){
+          $view->with("channels",  Chanal::orderBy('created_at')->get());
+        });
     }
 }
