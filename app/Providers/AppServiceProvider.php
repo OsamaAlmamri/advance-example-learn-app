@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-use App\Payment\PaymentGateway;
+use App\Payment\BankPaymentGateway;
+use App\Payment\CreditPaymentGateway;
+use App\Payment\IPaymentGatewayContract;
 use Illuminate\Support\ServiceProvider;
 use PhpParser\Node\Expr\New_;
 
@@ -17,8 +19,11 @@ class AppServiceProvider extends ServiceProvider
     {
         //
 
-        $this->app->singleton(PaymentGateway::class,function ($app){
-            return new PaymentGateway('usd');
+        $this->app->singleton(IPaymentGatewayContract::class, function ($app) {
+            if (request()->has('credit'))
+                return new CreditPaymentGateway('usd');
+            else
+                return new BankPaymentGateway('usd');
         });
     }
 

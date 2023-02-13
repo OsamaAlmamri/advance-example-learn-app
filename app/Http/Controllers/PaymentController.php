@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Orders\OrderDetails;
-use App\Payment\PaymentGateway;
+use App\Payment\BankPaymentGateway;
+use App\Payment\IPaymentGatewayContract;
 
 class PaymentController
 {
 
 
-    public  function  store(OrderDetails $orderDetails,PaymentGateway $paymentGateway)
+    public  function  store(OrderDetails $orderDetails, IPaymentGatewayContract $paymentGateway)
     {
 
         $orderDetails->all();

@@ -5,7 +5,7 @@ namespace App\Payment;
 
 use Illuminate\Support\Str;
 
-class PaymentGateway
+class BankPaymentGateway implements IPaymentGatewayContract
 {
 
 
@@ -15,23 +15,23 @@ class PaymentGateway
     public function __construct($currency)
     {
         $this->currency = $currency;
-        $this->discount=0;
+        $this->discount = 0;
 
     }
 
     public function setDiscount($amount)
     {
-        $this->discount=$amount;
+        $this->discount = $amount;
     }
 
     public function charge($amount)
     {
 
-        $discount=$amount*( $this->discount/100);
+        $discount = $amount * ($this->discount / 100);
         return [
-            'amount' => $amount-$discount,
-            'discount' =>$discount,
-            'discount_percent' => $this->discount."%",
+            'amount' => $amount - $discount,
+            'discount' => $discount,
+            'discount_percent' => $this->discount . "%",
             'currency' => $this->currency,
             'conform_code' => Str::random()
         ];
