@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\ChannelComposers;
 use App\Models\Chanal;
 use App\Payment\BankPaymentGateway;
 use App\Payment\CreditPaymentGateway;
@@ -42,8 +43,14 @@ class AppServiceProvider extends ServiceProvider
 
 
         // option 2 Granular view with wildcards
-        View::composer(['channels','posts.*'],function ($view){
-          $view->with("channels",  Chanal::orderBy('created_at')->get());
-        });
+//        View::composer(['channels','posts.*'],function ($view){
+//          $view->with("channels",  Chanal::orderBy('created_at')->get());
+//        });
+//
+
+        // option 3  Dedicated class
+
+        View::composer(['channels','posts.*'],ChannelComposers::class);
+
     }
 }
