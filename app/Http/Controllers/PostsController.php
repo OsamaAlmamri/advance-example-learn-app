@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Chanal;
 use Illuminate\Http\Request;
 
-class ChanalController extends Controller
+class PostsController extends Controller
 {
     //
 
-    public function index()
+    public function create()
     {
 
-       ;
-        return view('channels');
+        return view('posts.create');
     }
 
 

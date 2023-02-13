@@ -20,3 +20,5 @@ Route::get('/', function () {
 
 
 Route::get('pay', [PaymentController::class, 'store']);
+Route::get('channels', [\App\Http\Controllers\ChanalController::class, 'index']);
+Route::get('post/create', [\App\Http\Controllers\PostsController::class, 'create']);
