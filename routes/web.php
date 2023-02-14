@@ -35,4 +35,9 @@ Route::get('/facades',function (){
     PostCard::hello("hi osama",'osama.moh.almamari@gmail.com');
 });
 
+Route::get('macro',function (){
+
+    dump(\Illuminate\Support\Str::partNumber("Osama"));
+});
+
 

@@ -10,6 +10,7 @@ use App\Payment\IPaymentGatewayContract;
 use App\PostCardSendingService;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use PhpParser\Node\Expr\New_;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,9 +32,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         //alias "PostCard" to "PostCardSendingService"
-        $this->app->singleton("PostCard",function ($app){
+        $this->app->singleton("PostCard", function ($app) {
 
-            return new  PostCardSendingService("USA",5,4) ;
+            return new  PostCardSendingService("USA", 5, 4);
         });
     }
 
@@ -44,7 +45,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
 
 
         // every single view
@@ -60,7 +60,12 @@ class AppServiceProvider extends ServiceProvider
 
         // option 3  Dedicated class
 
-        View::composer(['channels','posts.*'],ChannelComposers::class);
+        View::composer(['channels', 'posts.*'], ChannelComposers::class);
+
+        Str::macro('partNumber', function ($part) {
+
+            return 'AB-' . substr($part, 0, 3) . '-' . substr($part, 3);
+        });
 
     }
 }
