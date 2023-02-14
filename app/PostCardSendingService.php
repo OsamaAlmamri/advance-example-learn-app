@@ -26,8 +26,8 @@ class PostCardSendingService
 
         });
 
-//        return dump("postcard  was send with message :" . $message);
-        return $this;
+        return dump("postcard  was send with message :" . $message);
+//        return $this;
     }
 
     public function hello2($message)
