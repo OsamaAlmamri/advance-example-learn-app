@@ -69,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
             return 'Other-' . substr($part, 0, 3) . '-' . substr($part, 3);
         });
 
-        Str::mixin(new StrMixin(),true);
+        Str::mixin(new StrMixin(),false);
 
         ResponseFactory::macro('errorJson', function ($message = " Default Error Message", $error_code = 123) {
 
