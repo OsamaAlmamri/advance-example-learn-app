@@ -4,6 +4,7 @@ use App\Http\Controllers\PaymentController;
 use App\PostCard;
 use App\PostCardSendingService;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,11 @@ Route::get('/facades',function (){
 Route::get('macro',function (){
 
     dump(\Illuminate\Support\Str::partNumber("Osama"));
+});
+
+Route::get('macro2',function (){
+
+    return Response::errorJson("message",404);
 });
 
 

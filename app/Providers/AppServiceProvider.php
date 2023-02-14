@@ -8,6 +8,7 @@ use App\Payment\BankPaymentGateway;
 use App\Payment\CreditPaymentGateway;
 use App\Payment\IPaymentGatewayContract;
 use App\PostCardSendingService;
+use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -65,6 +66,14 @@ class AppServiceProvider extends ServiceProvider
         Str::macro('partNumber', function ($part) {
 
             return 'AB-' . substr($part, 0, 3) . '-' . substr($part, 3);
+        });
+
+        ResponseFactory::macro('errorJson', function ($message = " Default Error Message", $error_code = 123) {
+
+            return [
+                'message' => $message,
+                "error_code" => $error_code
+            ];
         });
 
     }
