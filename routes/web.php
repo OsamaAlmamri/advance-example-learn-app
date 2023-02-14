@@ -48,3 +48,4 @@ Route::get('macro2',function (){
 });
 
 
+Route::get('posts',[\App\Http\Controllers\PostController::class,'index']);
