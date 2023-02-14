@@ -64,12 +64,12 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['channels', 'posts.*'], ChannelComposers::class);
 
-//        Str::macro('partNumber', function ($part) {
-//
-//            return 'AB-' . substr($part, 0, 3) . '-' . substr($part, 3);
-//        });
+        Str::macro('partNumber', function ($part) {
 
-        Str::mixin(new StrMixin());
+            return 'Other-' . substr($part, 0, 3) . '-' . substr($part, 3);
+        });
+
+        Str::mixin(new StrMixin(),true);
 
         ResponseFactory::macro('errorJson', function ($message = " Default Error Message", $error_code = 123) {
 
