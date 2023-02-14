@@ -2,20 +2,12 @@
 
 namespace App\QueryFilters;
 
-class Sort
+class Sort  extends Filter
 {
 
-
-    public function handle($request, \Closure $next)
+    protected $col="sort";
+    protected function applyFilter($builder)
     {
-
-        if(!request()->has('sort'))
-            return $next($request);
-        else
-        {
-          $builder=  $next($request);
-          return  $builder->orderBy('title',request()->sort);
-        }
-
+        return $builder->orderBy('title', request()->sort);
     }
 }
