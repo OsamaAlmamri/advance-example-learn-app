@@ -5,6 +5,7 @@ use App\PostCard;
 use App\PostCardSendingService;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Response;
+use  Illuminate\Support\Str ;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,7 @@ Route::get('/facades',function (){
 
 Route::get('macro',function (){
 
-    dump(\Illuminate\Support\Str::partNumber("Osama"));
+    dump(Str::partNumber("Osama"),Str::prefix("Osama","Eng:"));
 });
 
 Route::get('macro2',function (){

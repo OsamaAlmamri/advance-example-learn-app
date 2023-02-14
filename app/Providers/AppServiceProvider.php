@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\View\Composers\ChannelComposers;
+use App\Mixins\StrMixin;
 use App\Models\Chanal;
 use App\Payment\BankPaymentGateway;
 use App\Payment\CreditPaymentGateway;
@@ -63,10 +64,12 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['channels', 'posts.*'], ChannelComposers::class);
 
-        Str::macro('partNumber', function ($part) {
+//        Str::macro('partNumber', function ($part) {
+//
+//            return 'AB-' . substr($part, 0, 3) . '-' . substr($part, 3);
+//        });
 
-            return 'AB-' . substr($part, 0, 3) . '-' . substr($part, 3);
-        });
+        Str::mixin(new StrMixin());
 
         ResponseFactory::macro('errorJson', function ($message = " Default Error Message", $error_code = 123) {
 
