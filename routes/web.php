@@ -32,7 +32,7 @@ $postcartd->hello("hi osama",'osama.moh.almamari@gmail.com');
 
 Route::get('/facades',function (){
 
-    PostCard::hello("hi osama",'osama.moh.almamari@gmail.com');
+    PostCard::hello("hi osama",'osama.moh.almamari@gmail.com')->hello2(" hi osama");
 });
 
 
