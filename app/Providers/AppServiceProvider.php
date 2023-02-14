@@ -7,6 +7,7 @@ use App\Models\Chanal;
 use App\Payment\BankPaymentGateway;
 use App\Payment\CreditPaymentGateway;
 use App\Payment\IPaymentGatewayContract;
+use App\PostCardSendingService;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use PhpParser\Node\Expr\New_;
@@ -28,6 +29,12 @@ class AppServiceProvider extends ServiceProvider
             else
                 return new BankPaymentGateway('usd');
         });
+
+        //alias "PostCard" to "PostCardSendingService"
+        $this->app->singleton("PostCard",function ($app){
+
+            return new  PostCardSendingService("USA",5,4) ;
+        });
     }
 
     /**
@@ -39,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
 
-        
+
         // every single view
 //        View::share( 'channels',Chanal::orderBy('created_at')->get());
 

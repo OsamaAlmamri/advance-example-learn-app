@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PaymentController;
+use App\PostCard;
 use App\PostCardSendingService;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,11 @@ Route::get('post/create', [\App\Http\Controllers\PostsController::class, 'create
 Route::get('postcard',function (){
 $postcartd=  new PostCardSendingService("USA",5,4) ;
 $postcartd->hello("hi osama",'osama.moh.almamari@gmail.com');
+});
+
+Route::get('/facades',function (){
+
+    PostCard::hello("hi osama",'osama.moh.almamari@gmail.com');
 });
 
 
