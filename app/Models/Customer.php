@@ -9,19 +9,21 @@ class Customer extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id','user_id'];
+
     public function format()
     {
         return
             [
-                "customer_id"=>$this->id,
-                "name"=>$this->name,
-                "email"=>$this->user->email,
-                "last_update"=>$this->updated_at->diffForHumans()
+                "customer_id" => $this->id,
+                "name" => $this->name,
+                "email" => $this->user->email,
+                "last_update" => $this->updated_at->diffForHumans()
             ];
     }
 
-    public  function  user()
+    public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

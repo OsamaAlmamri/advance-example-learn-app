@@ -13,19 +13,29 @@ class CustomerRepository
         return Customer::orderBy("name")
             ->where('active', 1)
             ->with('user')
-            ->get()->map(function ($customer){
-               return $customer->format();
-            });
+            ->get()->map->format();
     }
 
-    public function  findById($customer_id)
+    public function findById($customer_id)
     {
-        $customer=Customer::where('id',$customer_id)
+        return Customer::where('id', $customer_id)
+            ->with('user')
+            ->firstOrFail()->format();
+    }
+
+    public function update($customer_id)
+    {
+        $customer = Customer::where('id', $customer_id)
             ->with('user')
             ->firstOrFail();
-        return $customer->format();
+
+        return $customer->update(request()->only('name'));
     }
 
+    public function delete($customer_id)
+    {
+        $customer = Customer::where('id', $customer_id)->delete();
+    }
 
 
 }

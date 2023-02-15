@@ -51,4 +51,7 @@ Route::get('macro2',function (){
 
 Route::get('posts',[\App\Http\Controllers\PostController::class,'index']);
 Route::get('customers',[CustomerController::class,'index']);
+Route::get('customers/{id}/update',[CustomerController::class,'update']);
+Route::get('customers/{id}/delete ',[CustomerController::class,'delete']);
 Route::get('customers/{id}',[CustomerController::class,'show']);
+
