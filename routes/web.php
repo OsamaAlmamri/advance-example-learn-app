@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PaymentController;
 use App\PostCard;
 use App\PostCardSendingService;
@@ -49,3 +50,5 @@ Route::get('macro2',function (){
 
 
 Route::get('posts',[\App\Http\Controllers\PostController::class,'index']);
+Route::get('customers',[CustomerController::class,'index']);
+Route::get('customers/{id}',[CustomerController::class,'show']);
