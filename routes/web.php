@@ -6,7 +6,9 @@ use App\PostCard;
 use App\PostCardSendingService;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Response;
-use  Illuminate\Support\Str ;
+use Illuminate\Support\LazyCollection;
+use  Illuminate\Support\Str;
+use  Illuminate\Database\Eloquent\Collection;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,30 +30,47 @@ Route::get('pay', [PaymentController::class, 'store']);
 Route::get('channels', [\App\Http\Controllers\ChanalController::class, 'index']);
 Route::get('post/create', [\App\Http\Controllers\PostsController::class, 'create']);
 
-Route::get('postcard',function (){
-$postcartd=  new PostCardSendingService("USA",5,4) ;
-$postcartd->hello("hi osama",'osama.moh.almamari@gmail.com');
+Route::get('postcard', function () {
+    $postcartd = new PostCardSendingService("USA", 5, 4);
+    $postcartd->hello("hi osama", 'osama.moh.almamari@gmail.com');
 });
 
-Route::get('/facades',function (){
+Route::get('/facades', function () {
 
-    PostCard::hello("hi osama",'osama.moh.almamari@gmail.com');
+    PostCard::hello("hi osama", 'osama.moh.almamari@gmail.com');
 });
 
-Route::get('macro',function (){
+Route::get('macro', function () {
 
-    dump(Str::partNumber("Osama"),Str::prefix("Osama","Eng:"));
+    dump(Str::partNumber("Osama"), Str::prefix("Osama", "Eng:"));
 });
 
-Route::get('macro2',function (){
+Route::get('macro2', function () {
 
-    return Response::errorJson("message",404);
+    return Response::errorJson("message", 404);
 });
 
 
-Route::get('posts',[\App\Http\Controllers\PostController::class,'index']);
-Route::get('customers',[CustomerController::class,'index']);
-Route::get('customers/{id}/update',[CustomerController::class,'update']);
-Route::get('customers/{id}/delete ',[CustomerController::class,'delete']);
-Route::get('customers/{id}',[CustomerController::class,'show']);
+Route::get('posts', [\App\Http\Controllers\PostController::class, 'index']);
+Route::get('customers', [CustomerController::class, 'index']);
+Route::get('customers/{id}/update', [CustomerController::class, 'update']);
+Route::get('customers/{id}/delete ', [CustomerController::class, 'delete']);
+Route::get('customers/{id}', [CustomerController::class, 'show']);
+
+
+Route::get('lazy', function () {
+
+//    $collection = Collection::times(6000000)
+//        ->map(function ($number) {
+//            return pow(2, $number);
+//        })->all();
+
+    // allow get huge data
+    $collection = LazyCollection::times(6000000)
+        ->map(function ($number) {
+            return pow(2, $number);
+        })->all();
+
+    return "done!";
+});
 

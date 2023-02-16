@@ -16,7 +16,7 @@ class CustomerController extends Controller
     {
         $this->customerRepository = $customerRepository;
     }
-    
+
 
     public function index()
     {
