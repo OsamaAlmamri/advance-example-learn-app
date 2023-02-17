@@ -34,13 +34,35 @@ return [
             'driver' => 'sync',
         ],
 
+
         'database' => [
             'driver' => 'database',
             'table' => 'jobs',
             'queue' => 'default',
+            //Preventing Job Duplication
+            //When a worker picks a job up from the queue, it marks it as reserved so no
+            //other worker picks that same job. Once it finishes running, it either removes
+            //the job from the queue or releases it back to be retried. When a job is
+            //released, it's no longer marked as reserved and can be picked up again by a
+            //worker.
+            //However, if the worker process crashes while in the middle of processing
+            //the job, it will remain reserved forever and will never run.
+            //To prevent this, Laravel sets a timeout for how long a job may remain in a
+            //reserved state. This timeout is 90 seconds by default, and it's set inside the
+            //config/queue.php configuration file:
+
+
+            //Since we have the timeout for this job set to 5 hours, another worker may
+            //pick it up—while still running—after 90 seconds since it'll be no longer
+            //reserved.
+            //This will lead to job duplication. Very bad outcome.
+            //To prevent this, we have to always make sure the value of retry_after is
+            //more than any timeout we set on a worker level or a job level:
             'retry_after' => 90,
             'after_commit' => false,
         ],
+
+
 
         'beanstalkd' => [
             'driver' => 'beanstalkd',
@@ -66,7 +88,7 @@ return [
             'driver' => 'redis',
             'connection' => 'default',
             'queue' => env('REDIS_QUEUE', 'default'),
-            'retry_after' => 90,
+            'retry_after' => 18060,
             'block_for' => null,
             'after_commit' => false,
         ],

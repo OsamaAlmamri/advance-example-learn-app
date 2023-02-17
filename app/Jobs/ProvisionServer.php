@@ -75,5 +75,6 @@ class ProvisionServer implements ShouldQueue
             // ...
             'message' => "Provisioning failed!",
         ]);
-        $
+        $this->server->delete();
+    }
 }
