@@ -13,6 +13,11 @@ class CancelConference implements ShouldQueue
 {
     private $conference;
 
+
+//We can also configure the connection from within the job class:
+    public $connection = 'database-cancelations';
+
+
     public function __construct(Conference $conference)
     {
         $this->conference = $conference;

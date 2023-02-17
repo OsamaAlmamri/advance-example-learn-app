@@ -27,9 +27,18 @@ class ConferenceController extends Controller
         //the main queue, we'll only have 50% of our workers with a chance to be
         //stuck at long-running jobs.
         $conference = Conference::find($id);
-        CancelConference::dispatch($conference)->onQueue('cancelations');
-
+//        CancelConference::dispatch($conference)->onQueue('cancelations');
         //php artisan queue:work --queue=cancelations,default --timeout=18000
+
+
+
+//        Instead of dispatching our job to a cancelations queue, we're going to
+//dispatch it to the database-cancellations connection:
+
+        CancelConference::dispatch($conference)->onConnection(
+            'database-cancelations'
+        );
+////php artisan queue:work database-cancelations
 
     }
 }

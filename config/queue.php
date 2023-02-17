@@ -58,10 +58,23 @@ return [
             //This will lead to job duplication. Very bad outcome.
             //To prevent this, we have to always make sure the value of retry_after is
             //more than any timeout we set on a worker level or a job level:
+//            'retry_after' => 18060,
             'retry_after' => 90,
             'after_commit' => false,
         ],
 
+        //We had to configure retry_after a bit earlier. This will apply to all jobs
+        //dispatched to our database queue connection. If a worker crashes while it's
+        //in the middle of processing any job, other workers will not pick it up for 5
+        //hours.
+        //For that reason, we need to set retry_after to 18060 seconds for just our
+        //cancelations queue. To do that, we'll need to create a completely separate
+        //connection
+        'database-cancelations' => [
+            // 'driver' => 'database',
+            // // ...
+            'retry_after' => 18060,
+        ],
 
 
         'beanstalkd' => [
