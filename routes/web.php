@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\LazyCollection;
 use  Illuminate\Support\Str;
 use  Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Queue;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,4 +89,16 @@ Route::get('q', function () {
 //    $job = new TestJob($task);
 //
 //    $this->dispatch($job);
+});
+
+Route::get('q2', function () {
+
+    $task = new Task();
+    $task->data = "test";
+    $task->status = "pending";
+    $task->save();
+    \Illuminate\Support\Facades\Bus::dispatch(
+        new TestJob($task)
+    );
+
 });
