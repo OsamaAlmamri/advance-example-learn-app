@@ -1,0 +1,37 @@
+To  Run Job
+
+php artisan queue:work
+
+php artisan queue:work --queue=payments,default
+php artisan queue:work --queue=default,payments
+
+------------------------------
+
+To retry  Run Job
+php artisan queue:retry 10
+-------- 10 is a id of failed_jobs table
+
+To  Run Job with tries 3 times
+php artisan queue:work --tries=3   or set in job class {  public $tries = 3;}
+This worker is going to attempt a job 3 times before it considers it a failure.
+
+
+---------------------------
+If a job fails to complete and multiple tries were configured, the worker will
+dispatch the job back to the queue. That newly dispatched job will be picked
+up again by a worker.
+   public $backoff = 60;//seconds
+
+   So if the job fails to complete at 22:09:00, the workers will only try it at
+   22:10:00 or after.
+----------------------
+If a job fails for a second time, 60 seconds might not be not enough time for
+the mailing service to recover. It might be a good idea to increase the delay
+after each attempt:
+
+in code
+ public $backoff = [60, 120];
+in console
+php artisan queue:work --backoff=60,120
+
+--------------------------
