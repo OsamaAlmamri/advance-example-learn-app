@@ -71,7 +71,7 @@ class SendWebhook implements ShouldQueue
         //MaxAttemptsExceededException exception.
         //In other words, failed() is called when the worker is done retrying this job.
 
-        
+
 //        Mail::to(
 //            $this->integration->developer_email
 //        )->send(...);
