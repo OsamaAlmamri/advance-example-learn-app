@@ -102,3 +102,12 @@ Route::get('q2', function () {
     );
 
 });
+
+Route::get('q3', function () {
+
+    $task = new Task();
+    $task->data = "test";
+    $task->status = "pending";
+    $task->save();
+    TestJob::dispatch($task);
+});
