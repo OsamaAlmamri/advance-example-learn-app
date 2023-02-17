@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Http\View\Composers\ChannelComposers;
 use App\Mixins\StrMixin;
 use App\Models\Chanal;
+use App\Models\Task;
+use App\Observers\TaskObserver;
 use App\Payment\BankPaymentGateway;
 use App\Payment\CreditPaymentGateway;
 use App\Payment\IPaymentGatewayContract;
@@ -48,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
+        Task::observe(TaskObserver::class);
 
         // every single view
 //        View::share( 'channels',Chanal::orderBy('created_at')->get());

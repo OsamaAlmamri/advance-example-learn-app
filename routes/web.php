@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PaymentController;
+use App\Jobs\TestJob;
+use App\Models\Task;
 use App\PostCard;
 use App\PostCardSendingService;
 use Illuminate\Support\Facades\Route;
@@ -74,3 +76,16 @@ Route::get('lazy', function () {
     return "done!";
 });
 
+
+Route::get('q', function () {
+
+    $task = new Task();
+    $task->data = "test";
+    $task->status = "pending";
+    $task->save();
+    return dd("done");
+
+//    $job = new TestJob($task);
+//
+//    $this->dispatch($job);
+});
