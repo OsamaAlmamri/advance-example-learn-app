@@ -15,6 +15,7 @@ class TaskObserver
     {
 
 
-        dispatch(new TestJob($task));
+        dispatch(new TestJob($task))->onQueue('payments');
+
     }
 }
