@@ -25,8 +25,11 @@ class TestJob implements ShouldQueue
     private Task $task2;
     public $timeout = 10000;
 //    public $queue = 'example_queue_name';
-//    public $retries = 3;
-//    public $backoff = 60;
+    public $tries = 3;
+    public $backoff = 60;//seconds
+
+//    public $backoff = [60, 120];
+
 
     public function __construct(Task $task)
     {

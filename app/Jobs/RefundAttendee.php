@@ -20,7 +20,9 @@ class RefundAttendee implements ShouldQueue
     }
     public function handle()
     {
-        $this->attendee->invoice->refund();
+        if (! $this->attendee->invoice->wasRefunded()) {
+            $this->attendee->invoice->refund();
+        }
 //        Mail::to($this->attendee)->send(...);
     }
 

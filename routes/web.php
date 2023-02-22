@@ -109,5 +109,5 @@ Route::get('q3', function () {
     $task->data = "test";
     $task->status = "pending";
     $task->save();
-    TestJob::dispatch($task)
+    TestJob::dispatch($task);
 });
