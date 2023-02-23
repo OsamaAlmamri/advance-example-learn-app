@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->foreignId('conference_id')->constrained('conference_id');
+            $table->foreignId('conference_id')->constrained('conferences');
             $table->timestamps();
         });
     }
