@@ -111,5 +111,3 @@ Route::get('q3', function () {
     $task->save();
     TestJob::dispatch($task);
 });
-
-Route::resource("products",\App\Http\Controllers\ProductController::class);
